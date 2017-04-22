@@ -29,7 +29,7 @@ class MapGeneratorTest extends TestCase
 
         $tiles = $generator->generate(2)->getTiles();
 
-        $this->assertCount(100, $tiles);
+        $this->assertCount(100, array_unique($tiles->toArray()));
 
         foreach ($tiles as $tile) {
             $this->assertInstanceOf(Tile::class, $tile);

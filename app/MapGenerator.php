@@ -17,6 +17,12 @@ class MapGenerator
 
     private function generateTiles($mapSize): Collection
     {
-        return new Collection(array_fill(0, $mapSize * $mapSize, new Tile));
+        $tiles = new Collection;
+
+        for ($i = 0; $i < $mapSize * $mapSize; ++$i) {
+            $tiles->push(new Tile);
+        }
+
+        return $tiles;
     }
 }
