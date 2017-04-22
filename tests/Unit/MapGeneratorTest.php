@@ -18,7 +18,7 @@ class MapGeneratorTest extends TestCase
 
     public function setUp()
     {
-        $this->resources = collect([new Resource, new Resource, new Resource]);
+        $this->resources = collect([new Resource(2), new Resource(2), new Resource(2)]);
         $this->generator = new MapGenerator(new DummyResourceFactory($this->resources));
     }
 

@@ -64,7 +64,7 @@ class MapTest extends TestCase
         $tiles = collect();
 
         for ($i = 0; $i < $numberOfTiles; ++$i) {
-            $tiles->push(new Tile(new Resource));
+            $tiles->push(new Tile(new Resource(2)));
         }
 
         return $tiles;

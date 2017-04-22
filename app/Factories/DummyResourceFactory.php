@@ -7,23 +7,23 @@ use Illuminate\Support\Collection;
 
 class DummyResourceFactory implements ResourceFactory
 {
-    private $tiles;
+    private $resources;
 
-    private $numberTiles;
+    private $numberResources;
 
     private $index = 0;
 
-    public function __construct(Collection $tiles)
+    public function __construct(Collection $resources)
     {
-        $this->tiles = $tiles;
-        $this->numberTiles = count($this->tiles);
+        $this->resources = $resources;
+        $this->numberResources = count($this->resources);
     }
 
     public function build(): Resource
     {
-        $tile = $this->tiles->get($this->index % $this->numberTiles);
+        $resource = $this->resources->get($this->index % $this->numberResources);
         ++$this->index;
 
-        return $tile;
+        return $resource;
     }
 }

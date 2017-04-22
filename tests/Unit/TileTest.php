@@ -11,7 +11,7 @@ class TileTest extends TestCase
     /** @test */
     public function it_returns_its_resource()
     {
-        $resource = new Resource;
+        $resource = new Resource(2);
         $tile = new Tile($resource);
 
         $this->assertSame($resource, $tile->getResource());

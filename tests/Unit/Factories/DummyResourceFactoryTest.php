@@ -12,7 +12,7 @@ class DummyResourceFactoryTest extends TestCase
     /** @test */
     public function it_retrieves_the_next_tile_from_the_provided_collection_as_fifo()
     {
-        $resources = collect([new Resource, new Resource, new Resource]);
+        $resources = collect([new Resource(2), new Resource(2), new Resource(2)]);
 
         $factory = new DummyResourceFactory($resources);
 
