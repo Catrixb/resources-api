@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Map;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class MapTest extends TestCase
 {
