@@ -4,12 +4,12 @@ namespace App;
 
 class MapGenerator
 {
-    public function __construct()
-    {
-    }
+    const DEFAULT_SIZE = 10;
+    const GRID_EXPANSION = 2;
+
 
     public function generate(int $numberPlayers): Map
     {
-        return new Map(10);
+        return new Map(static::DEFAULT_SIZE + ($numberPlayers - 2) * static::GRID_EXPANSION);
     }
 }
