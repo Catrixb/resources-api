@@ -13,6 +13,12 @@ class Map
     private $size;
     private $tiles;
 
+    /**
+     * @param int $size
+     * @param Collection $tiles
+     *
+     * @throws MapException
+     */
     public function __construct(int $size, Collection $tiles)
     {
         $this->size = $size;
@@ -41,6 +47,25 @@ class Map
                     $this->size,
                     $this->tiles->count()
                 )
+            );
+        }
+    }
+
+    /**
+     * @param int $x
+     * @param int $y
+     *
+     * @return Tile
+     *
+     * @throws MapException
+     */
+    public function getTileByCoordinates(int $x, int $y): Tile
+    {
+        try {
+            return $this->tiles->get($this->size * ($y - 1) + $x - 1);
+        } catch (\Throwable $e) {
+            throw new MapException(
+                "You're trying to access a non existing tile ($x, $y) for a maximum of ($this->size, $this->size)"
             );
         }
     }
