@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Exceptions\MapException;
 use App\Map;
+use App\Resource;
 use App\Tile;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\TestCase;
@@ -63,7 +64,7 @@ class MapTest extends TestCase
         $tiles = collect();
 
         for ($i = 0; $i < $numberOfTiles; ++$i) {
-            $tiles->push(new Tile);
+            $tiles->push(new Tile(new Resource));
         }
 
         return $tiles;
