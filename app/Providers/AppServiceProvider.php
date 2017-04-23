@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Factories\RandomResourceFactory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app[ResourceFactory::class] = new RandomResourceFactory(collect());
     }
 
     /**

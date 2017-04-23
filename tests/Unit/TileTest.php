@@ -16,4 +16,12 @@ class TileTest extends TestCase
 
         $this->assertSame($resource, $tile->getResource());
     }
+
+    /** @test */
+    public function it_is_json_serializable()
+    {
+        $tile = new Tile(new Resource(2));
+
+        $this->assertJson(json_encode(['resource' => 1]), json_encode($tile));
+    }
 }

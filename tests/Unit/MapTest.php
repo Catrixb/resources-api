@@ -59,6 +59,16 @@ class MapTest extends TestCase
         $map->getTileByCoordinates(8, 7);
     }
 
+    public function it_is_json_serializable()
+    {
+        $map = new Map(2, $this->createTileCollection(2 * 2));
+
+        $this->assertJson(json_encode([
+            [['resource' => 1], ['resource' => 1]],
+            [['resource' => 1], ['resource' => 1]]
+        ]), json_encode($map));
+    }
+
     private function createTileCollection($numberOfTiles): Collection
     {
         $tiles = collect();

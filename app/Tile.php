@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Tile
+class Tile implements \JsonSerializable
 {
 
     private $resource;
@@ -20,5 +20,10 @@ class Tile
     public function getResource()
     {
         return $this->resource;
+    }
+
+    function jsonSerialize()
+    {
+        return ['resource' => $this->resource->jsonSerialize()];
     }
 }

@@ -1,0 +1,17 @@
+PHPUnit 5.7.19 by Sebastian Bergmann and contributors.
+
+F.............                                                    14 / 14 (100%)
+
+Time: 118 ms, Memory: 14.00MB
+
+There was 1 failure:
+
+1) Tests\Feature\GameTest::it_generates_a_map
+Expected status code 201 but received 500.
+Failed asserting that false is true.
+
+/Users/catrix/Dev/Pear/vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestResponse.php:76
+/Users/catrix/Dev/Pear/tests/Feature/GameTest.php:26
+
+FAILURES!
+Tests: 14, Assertions: 231, Failures: 1.

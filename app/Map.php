@@ -6,9 +6,10 @@
 namespace App;
 
 use App\Exceptions\MapException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class Map
+class Map extends Model
 {
     private $size;
     private $tiles;
@@ -21,6 +22,8 @@ class Map
      */
     public function __construct(int $size, Collection $tiles)
     {
+        parent::__construct();
+
         $this->size = $size;
         $this->tiles = $tiles;
 
@@ -68,5 +71,27 @@ class Map
                 "You're trying to access a non existing tile ($x, $y) for a maximum of ($this->size, $this->size)"
             );
         }
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function(Map $map) {
+            $map->attributes['content'] = json_encode($map->jsonSerialize());
+        });
+    }
+
+    public function jsonSerialize()
+    {
+        $map = [];
+
+        for ($i = 0; $i < $this->size; ++$i) {
+            for ($j = 0; $j < $this->size; ++$j) {
+                $map[$i][$j] = $this->tiles->get($i * $this->size + $j);
+            }
+        }
+
+        return $map;
     }
 }
