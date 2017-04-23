@@ -63,7 +63,7 @@ class MapTest extends TestCase
     {
         $map = new Map(2, $this->createTileCollection(2 * 2));
 
-        $this->assertJson(json_encode([
+        $this->assertJsonStringEqualsJsonString(json_encode([
             [['resource' => 1], ['resource' => 1]],
             [['resource' => 1], ['resource' => 1]]
         ]), json_encode($map));

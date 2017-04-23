@@ -12,6 +12,6 @@ class GameController
         $map = $mapGenerator->generate(Player::count());
         $map->save();
 
-        return new Response(['map' => $map], 201, ['Content-Type' => 'application/json']);
+        return new Response(['map' => $map, 'players' => Player::all()], 201, ['Content-Type' => 'application/json']);
     }
 }

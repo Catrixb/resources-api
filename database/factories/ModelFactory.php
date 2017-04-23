@@ -26,5 +26,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Player::class, function (Faker\Generator $faker) {
 
     return [
+        'token' => $faker->numberBetween(0, 8)
     ];
 });
