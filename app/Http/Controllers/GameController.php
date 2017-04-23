@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Map;
 use App\MapGenerator;
 use App\Player;
 use Illuminate\Http\Request;
@@ -8,12 +9,20 @@ use Illuminate\Http\Response;
 
 class GameController extends Controller
 {
+    public function delete()
+    {
+        Map::truncate();
+        Player::truncate();
+
+        return new Response('', 204);
+    }
+
     public function generateMap(MapGenerator $mapGenerator)
     {
         $map = $mapGenerator->generate(Player::count());
         $map->save();
 
-        return new Response(['map' => $map, 'players' => Player::all()], 201, ['Content-Type' => 'application/json']);
+        return new Response(['map' => $map, 'players' => Player::all()], 201);
     }
 
     public function join(Request $request)
@@ -22,6 +31,6 @@ class GameController extends Controller
 
         Player::create($request->all());
 
-        return new Response('', 201, ['Content-Type' => 'application/json']);
+        return new Response('', 204);
     }
 }

@@ -20,7 +20,7 @@ class MapGenerator
     {
         $mapSize = static::DEFAULT_SIZE + ($numberPlayers - 2) * static::GRID_EXPANSION;
 
-        return new Map($mapSize, $this->generateTiles($mapSize));
+        return Map::createNewMapBySizeAndTiles($mapSize, $this->generateTiles($mapSize));
     }
 
     private function generateTiles($mapSize): Collection

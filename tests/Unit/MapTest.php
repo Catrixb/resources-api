@@ -14,7 +14,7 @@ class MapTest extends TestCase
     /** @test */
     public function it_gets_the_map_size()
     {
-        $map = new Map(1, $this->createTileCollection(1));
+        $map = Map::createNewMapBySizeAndTiles(1, $this->createTileCollection(1));
 
         $this->assertEquals(1, $map->getSize());
     }
@@ -23,7 +23,7 @@ class MapTest extends TestCase
     public function it_gets_the_tiles()
     {
         $tiles = $this->createTileCollection(2 * 2);
-        $map = new Map(2, $tiles);
+        $map = Map::createNewMapBySizeAndTiles(2, $tiles);
 
         $this->assertSame($tiles, $map->getTiles());
     }
@@ -35,7 +35,7 @@ class MapTest extends TestCase
 
         $this->expectException(MapException::class);
 
-        new Map(10, $tiles);
+        Map::createNewMapBySizeAndTiles(10, $tiles);
     }
 
     /** @test */
@@ -43,7 +43,7 @@ class MapTest extends TestCase
     {
         $tiles = $this->createTileCollection(6 * 6);
 
-        $map = new Map(6, $tiles);
+        $map = Map::createNewMapBySizeAndTiles(6, $tiles);
 
         $this->assertSame($tiles->get(8), $map->getTileByCoordinates(3, 2));
     }
@@ -51,7 +51,7 @@ class MapTest extends TestCase
     /** @test */
     public function it_throws_an_exception_if_we_try_to_access_a_non_existing_tile()
     {
-        $map = new Map(6, $this->createTileCollection(6 * 6));
+        $map = Map::createNewMapBySizeAndTiles(6, $this->createTileCollection(6 * 6));
 
         $this->expectException(MapException::class);
         $this->expectExceptionMessage("You're trying to access a non existing tile (8, 7) for a maximum of (6, 6)");
@@ -61,7 +61,7 @@ class MapTest extends TestCase
 
     public function it_is_json_serializable()
     {
-        $map = new Map(2, $this->createTileCollection(2 * 2));
+        $map = Map::createNewMapBySizeAndTiles(2, $this->createTileCollection(2 * 2));
 
         $this->assertJsonStringEqualsJsonString(json_encode([
             [['resource' => 1], ['resource' => 1]],

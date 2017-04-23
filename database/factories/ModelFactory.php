@@ -24,9 +24,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Player::class, function (Faker\Generator $faker) {
-
     return [
         'name' => $faker->name,
         'token' => $faker->numberBetween(0, 8),
+    ];
+});
+
+$factory->define(App\Map::class, function () {
+    return [
+        'content' => '',
     ];
 });

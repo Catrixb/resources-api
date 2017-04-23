@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Factories\DummyResourceFactory;
 use App\Factories\ResourceFactory;
+use App\Map;
 use App\Player;
 use App\Resource;
 use Tests\TestCase;
@@ -14,6 +15,27 @@ class GameControllerTest extends TestCase
 {
     use DatabaseMigrations;
     use DatabaseTransactions;
+
+    /** @test */
+    public function it_deletes_the_game()
+    {
+        $map = factory(Map::class)->create();
+        $players = factory(Player::class)->times(3)->create();
+
+        $this->assertDatabaseHas('maps', $map->toArray());
+        $players->each(function(Player $player) {
+            $this->assertDatabaseHas('players', $player->toArray());
+        });
+
+        $response = $this->deleteJson('/game');
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('maps', $map->toArray());
+        $players->each(function(Player $player) {
+            $this->assertDatabaseMissing('players', $player->toArray());
+        });
+    }
 
     /** @test */
     public function it_generates_a_map()
@@ -39,7 +61,7 @@ class GameControllerTest extends TestCase
     {
         $response = $this->postJson('/game/join', ['name' => 'Jean']);
 
-        $response->assertStatus(201);
+        $response->assertStatus(204);
 
         $this->assertDatabaseHas('players', ['name' => 'Jean']);
     }

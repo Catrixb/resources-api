@@ -18,16 +18,20 @@ class Map extends Model
      * @param int $size
      * @param Collection $tiles
      *
+     * @return static
+     *
      * @throws MapException
      */
-    public function __construct(int $size, Collection $tiles)
+    public static function createNewMapBySizeAndTiles(int $size, Collection $tiles)
     {
-        parent::__construct();
+        $map = new static;
 
-        $this->size = $size;
-        $this->tiles = $tiles;
+        $map->size = $size;
+        $map->tiles = $tiles;
 
-        $this->checkNumberOfTilesForSize();
+        $map->checkNumberOfTilesForSize();
+
+        return $map;
     }
 
     public function getSize(): int
