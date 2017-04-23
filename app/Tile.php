@@ -42,7 +42,7 @@ class Tile implements \JsonSerializable
 
     public function getPlayer(): Player
     {
-        return $this->player ?: new Player;
+        return $this->player ?: new Player(['name' => 'none']);
     }
 
     public function getTokenNumber(): int

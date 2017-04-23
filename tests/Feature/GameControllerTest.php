@@ -40,7 +40,7 @@ class GameControllerTest extends TestCase
 
         for ($i = 0; $i < $x; ++$i) {
             for ($j = 0; $j < $y; ++$j) {
-                $map[$i][$j] = ['resource' => 1, 'occupant' => ['id' => 0, 'token' => 0]];
+                $map[$i][$j] = ['resource' => 1, 'occupant' => ['name' => 'none', 'token' => 0]];
             }
         }
 

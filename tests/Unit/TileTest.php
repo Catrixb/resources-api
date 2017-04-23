@@ -22,9 +22,9 @@ class TileTest extends TestCase
     public function it_is_json_serializable()
     {
         $tile = new Tile(new Resource(2));
-        $tile->setOccupant(new Player(['id' => 1]), 3);
+        $tile->setOccupant(new Player(['name' => 'Didier']), 3);
 
-        $this->assertJsonStringEqualsJsonString(json_encode(['resource' => 2, 'occupant' => ['id' => 1, 'token' => 3]]), json_encode($tile));
+        $this->assertJsonStringEqualsJsonString(json_encode(['resource' => 2, 'occupant' => ['name' => 'Didier', 'token' => 3]]), json_encode($tile));
     }
 
     /** @test */
@@ -32,12 +32,12 @@ class TileTest extends TestCase
     {
         $tile = new Tile(new Resource(2));
 
-        $this->assertEquals(0, $tile->getPlayer()->id);
+        $this->assertEquals('none', $tile->getPlayer()->name);
         $this->assertEmpty($tile->getTokenNumber());
 
-        $tile->setOccupant(new Player(['id' => 1]), 3);
+        $tile->setOccupant(new Player(['name' => 'Etienne']), 3);
 
-        $this->assertEquals(1, $tile->getPlayer()->id);
+        $this->assertEquals('Etienne', $tile->getPlayer()->name);
         $this->assertEquals(3, $tile->getTokenNumber());
     }
 }

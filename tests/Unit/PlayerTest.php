@@ -11,6 +11,6 @@ class PlayerTest extends TestCase
     {
         $player = new Player;
 
-        $this->assertEquals(['id' => 0, 'token' => 0], $player->toArray());
+        $this->assertEquals(['name' => 'none', 'token' => 0], $player->toArray());
     }
 }
