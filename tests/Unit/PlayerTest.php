@@ -7,10 +7,11 @@ use PHPUnit\Framework\TestCase;
 class PlayerTest extends TestCase
 {
     /** @test */
-    public function it_returns_an_id_even_if_undefined()
+    public function it_has_default_value_for_a_player()
     {
         $player = new Player;
 
-        $this->assertEquals(['name' => 'none', 'token' => 0], $player->toArray());
+        $this->assertEquals('none', $player->name);
+        $this->assertEquals(0, $player->token);
     }
 }

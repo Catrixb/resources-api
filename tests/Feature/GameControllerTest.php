@@ -21,7 +21,7 @@ class GameControllerTest extends TestCase
         $this->app[ResourceFactory::class] = new DummyResourceFactory(collect([new Resource(1)]));
         $players = factory(Player::class)->times(3)->create();
 
-        $response = $this->post('/game/generate-map', [], ['Content-Type' => 'application/json']);
+        $response = $this->postJson('/game/generate-map');
 
         $response->assertStatus(201);
         $response->assertJson([
@@ -32,6 +32,24 @@ class GameControllerTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('maps', ['content' => json_encode($this->generateMap(12, 12))]);
+    }
+
+    /** @test */
+    public function a_player_can_join_the_game()
+    {
+        $response = $this->postJson('/game/join', ['name' => 'Jean']);
+
+        $response->assertStatus(201);
+
+        $this->assertDatabaseHas('players', ['name' => 'Jean']);
+    }
+
+    /** @test */
+    public function a_player_must_provide_a_name_to_join_the_game()
+    {
+        $response = $this->postJson('/game/join');
+
+        $response->assertStatus(422);
     }
 
     private function generateMap(int $x, int $y)
